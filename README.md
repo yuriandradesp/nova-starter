@@ -1,159 +1,76 @@
-# Turborepo starter
+# 🚀 nova-starter
 
-This Turborepo starter is maintained by the Turborepo core team.
+Welcome to **nova-starter**! This is a modern, open-source, multi-tenant SaaS boilerplate designed to accelerate your product development. Built with scalability and developer experience in mind, it seamlessly integrates a robust NestJS backend, a lightning-fast Next.js frontend, and a PostgreSQL database within a unified Turborepo monorepo architecture.
 
-## Using this example
+## ✨ Features
 
-Run the following command:
+- **Monorepo Architecture (Turborepo):** Efficiently manage full-stack apps and packages with high-speed remote caching and parallel execution.
+- **Secure JWT Authentication:** Full authentication flow using `bcrypt`, HTTP-only cookies, and Passport.js integration.
+- **Native Multi-Tenancy:** Built-in organization (Tenant) isolation with role-based memberships linking Users to Workspaces.
+- **Prisma Singleton Pattern:** Optimized and strongly-typed database access sharing a single Prisma Client instance across the whole architecture.
+- **Pure Tailwind CSS UI:** A meticulously crafted, dependency-free premium design system prioritizing a sleek SaaS "Dark Mode" aesthetic.
+- **GitHub Actions CI/CD:** Ready-to-go continuous integration pipeline for linting, type-checking, building, and automated Jest testing.
+- **📚 Built-in Documentation:** A dedicated Next.js documentation app ready to host your project guides.
 
-```sh
-npx create-turbo@latest
+## 📁 Project Structure
+
+```text
+nova-starter/
+├── apps/
+│   ├── api/     # NestJS backend API
+│   ├── docs/    # Next.js documentation site
+│   └── web/     # Next.js frontend application
+├── packages/
+│   ├── database/ # Prisma schema and client
+│   └── ui/       # Shared UI components
 ```
 
-## What's inside?
+## 🛠️ Tech Stack
 
-This Turborepo includes the following packages/apps:
+| Component | Technology | Description |
+| :--- | :--- | :--- |
+| **Monorepo** | Turborepo | High-performance build system |
+| **Frontend** | Next.js (App Router) | React framework for the Web |
+| **Backend** | NestJS | Progressive Node.js framework |
+| **Database** | PostgreSQL | Robust relational database |
+| **ORM** | Prisma | Next-generation Node.js/TypeScript ORM |
+| **Styling** | Tailwind CSS v4 | Utility-first CSS framework |
+| **Testing** | Jest | Delightful JavaScript Testing Framework |
 
-### Apps and Packages
+## 🚀 Getting Started
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+Follow these steps to get your local development environment running:
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo build
+### 1. Install Dependencies
+Run this command from the root of the project to install all dependencies across the monorepo:
+```bash
+npm install
 ```
 
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo build
-npm dlx turbo build
-npm exec turbo build
+### 2. Start the Database
+Spin up the local PostgreSQL database using Docker Compose:
+```bash
+docker compose up -d
 ```
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo build --filter=docs
+### 3. Initialize the Schema
+Navigate to the database package and apply the Prisma migrations to your local database:
+```bash
+cd packages/database
+npx prisma migrate dev
 ```
 
-Without global `turbo`:
-
-```sh
-npx turbo build --filter=docs
-npm exec turbo build --filter=docs
-npm exec turbo build --filter=docs
+### 4. Run the Development Servers
+Return to the root directory and start all applications simultaneously:
+```bash
+cd ../..
+npm run dev
 ```
 
-### Develop
+* **Frontend:** Available at `http://localhost:3000`
+* **Documentation:** Available at `http://localhost:3001`
+* **API:** Available at `http://localhost:3002`
 
-To develop all apps and packages, run the following command:
+## 📄 License
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo dev
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo dev
-npm exec turbo dev
-npm exec turbo dev
-```
-
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo dev --filter=web
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo dev --filter=web
-npm exec turbo dev --filter=web
-npm exec turbo dev --filter=web
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo login
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo login
-npm exec turbo login
-npm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo link
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo link
-npm exec turbo link
-npm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+This project is licensed under the MIT License. Feel free to use, modify, and distribute it as you see fit.
