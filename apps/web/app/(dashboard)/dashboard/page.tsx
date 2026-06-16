@@ -7,11 +7,17 @@ import { LogOut, LayoutDashboard, Settings, Users, FolderKanban, Search, Bell, T
 import Cookies from 'js-cookie';
 import { api } from '../../../lib/api';
 
+interface Project {
+  id: string;
+  name: string;
+  createdAt: string;
+}
+
 export default function DashboardPage() {
   const { user, loading, logout } = useAuth();
   const router = useRouter();
 
-  const [projects, setProjects] = useState<Record<string, unknown>[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [newProjectName, setNewProjectName] = useState('');
   const [isCreating, setIsCreating] = useState(false);
   const [isLoadingProjects, setIsLoadingProjects] = useState(false);

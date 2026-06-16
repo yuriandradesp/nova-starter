@@ -5,11 +5,25 @@ import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 import { api } from '../lib/api';
 
+interface Organization {
+  id: string;
+  name: string;
+  slug: string;
+}
+
+interface Membership {
+  id: string;
+  userId: string;
+  organizationId: string;
+  role: string;
+  organization: Organization;
+}
+
 interface User {
   id: string;
   email: string;
   name?: string;
-  memberships?: Record<string, unknown>[];
+  memberships?: Membership[];
 }
 
 interface AuthContextType {
@@ -59,7 +73,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       method: 'POST',
       body: JSON.stringify(data),
     });
-    await login({ email: data.email, password: data.password });
+    await login({ email: data.email as string, password: data.password as string });
   };
 
   const logout = () => {
