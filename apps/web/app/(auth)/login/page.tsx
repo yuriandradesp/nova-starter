@@ -17,7 +17,8 @@ export default function LoginPage() {
     setIsSubmitting(true);
     try {
       await login({ email, password });
-    } catch (err: any) {
+    } catch (error: unknown) {
+      const err = error as Error;
       setError(err.message || 'Failed to sign in');
       setIsSubmitting(false);
     }
@@ -81,7 +82,7 @@ export default function LoginPage() {
         </form>
 
         <p className="mt-8 text-sm text-center text-zinc-500">
-          Don't have an account?{' '}
+          {"Don't"} have an account?{' '}
           <Link href="/register" className="font-medium text-zinc-300 hover:text-zinc-100 transition-colors">
             Create an account
           </Link>

@@ -9,14 +9,14 @@ interface User {
   id: string;
   email: string;
   name?: string;
-  memberships?: any[];
+  memberships?: Record<string, unknown>[];
 }
 
 interface AuthContextType {
   user: User | null;
   loading: boolean;
-  login: (data: any) => Promise<void>;
-  register: (data: any) => Promise<void>;
+  login: (data: Record<string, string>) => Promise<void>;
+  register: (data: Record<string, string>) => Promise<void>;
   logout: () => void;
 }
 
@@ -44,7 +44,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     loadUser();
   }, []);
 
-  const login = async (data: any) => {
+  const login = async (data: Record<string, string>) => {
     const response = await api('/auth/login', {
       method: 'POST',
       body: JSON.stringify(data),
@@ -54,7 +54,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     router.push('/dashboard');
   };
 
-  const register = async (data: any) => {
+  const register = async (data: Record<string, string>) => {
     await api('/auth/register', {
       method: 'POST',
       body: JSON.stringify(data),

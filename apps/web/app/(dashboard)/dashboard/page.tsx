@@ -11,7 +11,7 @@ export default function DashboardPage() {
   const { user, loading, logout } = useAuth();
   const router = useRouter();
 
-  const [projects, setProjects] = useState<any[]>([]);
+  const [projects, setProjects] = useState<Record<string, unknown>[]>([]);
   const [newProjectName, setNewProjectName] = useState('');
   const [isCreating, setIsCreating] = useState(false);
   const [isLoadingProjects, setIsLoadingProjects] = useState(false);
@@ -199,7 +199,7 @@ export default function DashboardPage() {
             {/* Page Header */}
             <div>
               <h2 className="text-2xl font-semibold text-zinc-100 tracking-tight">Overview</h2>
-              <p className="mt-1 text-zinc-400 text-sm">Welcome back, {user.name?.split(' ')[0] || 'User'}. Here's what's happening.</p>
+              <p className="mt-1 text-zinc-400 text-sm">Welcome back, {user.name?.split(' ')[0] || 'User'}. {"Here's"} what{"'s"} happening.</p>
             </div>
 
             {/* Hero Card */}

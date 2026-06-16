@@ -18,7 +18,8 @@ export default function RegisterPage() {
     setIsSubmitting(true);
     try {
       await register({ name, email, password });
-    } catch (err: any) {
+    } catch (error: unknown) {
+      const err = error as Error;
       setError(err.message || 'Failed to create account');
       setIsSubmitting(false);
     }
