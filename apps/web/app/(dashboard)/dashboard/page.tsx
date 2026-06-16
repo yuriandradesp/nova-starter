@@ -3,6 +3,7 @@
 import { useAuth } from '../../../contexts/auth-context';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { LogOut, LayoutDashboard, Settings, Users, FolderKanban, Search, Bell, Trash2, Plus } from 'lucide-react';
 import Cookies from 'js-cookie';
 import { api } from '../../../lib/api';
@@ -105,7 +106,7 @@ export default function DashboardPage() {
             <div className="w-8 h-8 bg-zinc-100 rounded-lg flex items-center justify-center shadow-sm">
               <span className="text-zinc-950 font-bold text-sm">N</span>
             </div>
-            <h1 className="text-lg font-semibold tracking-tight text-zinc-100">Nova.</h1>
+            <h1 className="text-lg font-semibold tracking-tight text-zinc-100">Nova</h1>
           </div>
         </div>
         
@@ -140,10 +141,10 @@ export default function DashboardPage() {
             <Users size={18} className="mr-3 opacity-70" />
             Team
           </a>
-          <a href="#" className="flex items-center px-3 py-2.5 text-zinc-400 hover:bg-zinc-900/50 hover:text-zinc-200 rounded-lg text-sm font-medium transition-colors">
+          <Link href="/settings/profile" className="flex items-center px-3 py-2.5 text-zinc-400 hover:bg-zinc-900/50 hover:text-zinc-200 rounded-lg text-sm font-medium transition-colors">
             <Settings size={18} className="mr-3 opacity-70" />
             Settings
-          </a>
+          </Link>
         </nav>
 
         {/* Footer Sidebar */}
@@ -167,7 +168,7 @@ export default function DashboardPage() {
             <div className="w-8 h-8 bg-zinc-100 rounded-lg flex items-center justify-center">
               <span className="text-zinc-950 font-bold text-sm">N</span>
             </div>
-            <span className="font-semibold text-zinc-100">Nova.</span>
+            <span className="font-semibold text-zinc-100">Nova</span>
           </div>
 
           <div className="hidden md:flex items-center flex-1">
